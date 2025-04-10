@@ -1,0 +1,118 @@
+{% extends 'booking/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container py-5">
+   <div class="row mb-5">
+       <div class="col-lg-12 text-center">
+           <h1 class="display-4">About Our Team</h1>
+           <p class="lead">Meet the developers behind the Anandwan Visitor Room Booking System</p>
+           <hr class="my-4">
+       </div>
+   </div>
+
+   <div class="row mb-5">
+       <div class="col-lg-12">
+           <div class="card border-0 shadow-sm">
+               <div class="card-body p-5">
+                   <h2 class="text-center mb-4">About The Project</h2>
+                   <p>The Anandwan Visitor Room Booking System was developed to streamline the process of room reservations at Anandwan - "Forest of Joy" - a community rehabilitation center founded by social activist Baba Amte near Warora in Maharashtra, India.</p>
+                   <p>Our system enables visitors to check room availability, make bookings online, and manage their reservations efficiently. This helps Anandwan staff better manage their accommodation resources and provide improved service to visitors including students, researchers, volunteers, and tourists.</p>
+                   <p>This project was developed as part of our college project work with the goal of applying our technical skills to create meaningful solutions for social organizations.</p>
+               </div>
+           </div>
+       </div>
+   </div>
+
+   <h2 class="text-center mb-4">Our Team</h2>
+   
+   <!-- Team Leader -->
+   <div class="row mb-5">
+       <div class="col-lg-12">
+           <div class="card border-0 shadow-sm">
+               <div class="card-body p-4">
+                   <div class="row">
+                       <div class="col-md-4 text-center mb-4 mb-md-0">
+                           <img src="https://via.placeholder.com/300x300" alt="Prem Baba" class="img-fluid rounded-circle mb-3" width="200" height="200">
+                           <h3>Prem Baba</h3>
+                           <p class="text-success">Team Leader</p>
+                       </div>
+                       <div class="col-md-8 d-flex align-items-center">
+                           <div>
+                               <p class="lead">As the team leader, Prem coordinated our development efforts and ensured that all aspects of the project came together cohesively.</p>
+                               <p>He managed the overall project timeline, delegated tasks, and handled client communications to ensure the system met all requirements.</p>
+                               <p class="text-muted mb-3">Frontend Developer</p>
+                                <p>Creating templates/ for each file and ensuring jinja works well.</p>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+   
+   <!-- Team Members -->
+   <div class="row">
+       <!-- Mrudul Chaudhari -->
+       <div class="col-lg-6 mb-4">
+           <div class="card h-100 border-0 shadow-sm">
+               <div class="card-body p-4 text-center">
+                <img src="{% static 'booking/images/mrudul_photo.png' %}" alt="Mrudul Chaudhari"  width="auto" height="150">
+                   <h3>Mrudul Chaudhari</h3>
+                   <p class="text-muted mb-3">Backend Developer</p>
+                   <p>Responsible for designing the database structure and implementing the core booking logic and data processing.</p>
+                   
+               </div>
+           </div>
+       </div>
+       
+       <!-- Om Patni -->
+       <div class="col-lg-6 mb-4">
+           <div class="card h-100 border-0 shadow-sm">
+               <div class="card-body p-4 text-center">
+                   <img src="https://via.placeholder.com/250x250" alt="Om Patni" class="img-fluid rounded-circle mb-3" width="150" height="150">
+                   <h3>Om Patni</h3>
+                   <p class="text-muted mb-3">Frontend Developer - II</p>
+                   <p>Focused on creating intuitive user interfaces and responsive design to ensure the system works well on all devices.</p>
+               </div>
+           </div>
+       </div>
+       
+       <!-- Pihu Patne -->
+       <div class="col-lg-6 mb-4">
+           <div class="card h-100 border-0 shadow-sm">
+               <div class="card-body p-4 text-center">
+                   <img src="https://via.placeholder.com/250x250" alt="Pihu Patne" class="img-fluid rounded-circle mb-3" width="150" height="150">
+                   <h3>Pihu Patne</h3>
+                   <p class="text-muted mb-3">UI/UX Designer</p>
+                   <p>Designed the user experience flow and created the visual design elements to make the system both beautiful and functional.</p>
+               </div>
+           </div>
+       </div>
+       
+       <!-- Homeshwari Baitalwar -->
+       <div class="col-lg-6 mb-4">
+           <div class="card h-100 border-0 shadow-sm">
+               <div class="card-body p-4 text-center">
+                   <img src="https://via.placeholder.com/250x250" alt="Homeshwari Baitalwar" class="img-fluid rounded-circle mb-3" width="150" height="150">
+                   <h3>Homeshwari Baitalwar</h3>
+                   <p class="text-muted mb-3">Quality Assurance</p>
+                   <p>Conducted thorough testing to ensure the system works correctly and reliably under all conditions and user scenarios.</p>
+               </div>
+           </div>
+       </div>
+   </div>
+   
+   <div class="row mt-5">
+       <div class="col-lg-12">
+           <div class="card border-0 shadow-sm bg-light">
+               <div class="card-body p-4 text-center">
+                   <h3>Contact Us</h3>
+                   <p>If you have any questions or feedback about the Anandwan Visitor Room Booking System, please feel free to contact our team.</p>
+                   <a href="mailto:team@example.com" class="btn btn-success">Email the Team</a>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.db.models import Q
 from django.utils import timezone
@@ -70,6 +70,14 @@ def register(request):
         'user_form': user_form,
         'visitor_form': visitor_form
     })
+
+def about(request):
+    return render(request, 'booking/about.html')
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 @login_required
 def room_list(request):
