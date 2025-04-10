@@ -1,0 +1,80 @@
+{% extends 'booking/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h4>Complete Your Booking</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <h5>Booking Details</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Check-in Date</label>
+                                <input type="text" class="form-control" value="{{ check_in_date|date:'F d, Y' }}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Check-out Date</label>
+                                <input type="text" class="form-control" value="{{ check_out_date|date:'F d, Y' }}" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Number of Adults</label>
+                                <input type="text" class="form-control" value="{{ adults }}" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label class="form-label">Number of Children</label>
+                                <input type="text" class="form-control" value="{{ children }}" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h5 class="mt-4">Special Requests</h5>
+                    {{ form.special_requests|as_crispy_field }}
+                    
+                    <div class="alert alert-info mt-4">
+                        <h5 class="alert-heading">Payment Information</h5>
+                        <p>Total amount for {{ days }} nights: <strong>₹{{ total_amount }}</strong></p>
+                        <p>You will be required to pay the full amount upon arrival.</p>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success w-100 mt-3">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h4>Room Details</h4>
+            </div>
+            <div class="card-body">
+                <h5>{{ room_type.name }}</h5>
+                {% if room_type.image %}
+                <img src="{{ room_type.image.url }}" class="img-fluid mb-3 rounded" alt="{{ room_type.name }}">
+                {% endif %}
+                <p>{{ room_type.description }}</p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Price per night: ₹{{ room_type.price_per_day }}</li>
+                    <li class="list-group-item">Max Capacity: {{ room_type.capacity }} persons</li>
+                    <li class="list-group-item">Stay Duration: {{ days }} nights</li>
+                    <li class="list-group-item">Total Amount: ₹{{ total_amount }}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

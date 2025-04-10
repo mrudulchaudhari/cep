@@ -1,0 +1,51 @@
+{% extends 'booking/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h4>Booking Confirmation</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-success">
+                    <h4 class="alert-heading">Booking Successful!</h4>
+                    <p>Your booking has been confirmed. Please check the details below.</p>
+                </div>
+                
+                <h5>Booking Details</h5>
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <p><strong>Booking ID:</strong> {{ booking.id }}</p>
+                        <p><strong>Room:</strong> {{ booking.room.room_type.name }} - {{ booking.room.room_number }}</p>
+                        <p><strong>Check-in Date:</strong> {{ booking.check_in_date }}</p>
+                        <p><strong>Check-out Date:</strong> {{ booking.check_out_date }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Status:</strong> {{ booking.get_status_display }}</p>
+                        <p><strong>Guests:</strong> {{ booking.adults }} adults, {{ booking.children }} children</p>
+                        <p><strong>Total Amount:</strong> ₹{{ booking.total_amount }}</p>
+                        <p><strong>Booking Date:</strong> {{ booking.booking_date }}</p>
+                    </div>
+                </div>
+                
+                {% if booking.special_requests %}
+                <h5>Special Requests</h5>
+                <p>{{ booking.special_requests }}</p>
+                {% endif %}
+                
+                <div class="alert alert-info">
+                    <h5 class="alert-heading">Payment Information</h5>
+                    <p>Please make the payment of ₹{{ booking.total_amount }} upon arrival.</p>
+                    <p>If you need to cancel your booking, please do so at least 24 hours before your check-in date.</p>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="{% url 'user_bookings' %}" class="btn btn-success">View All Bookings</a>
+                    <a href="{% url 'home' %}" class="btn btn-outline-secondary">Return to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

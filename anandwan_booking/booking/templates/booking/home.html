@@ -1,0 +1,87 @@
+{% extends 'booking/base.html' %}
+
+{% block content %}
+<div class="jumbotron bg-light p-5 rounded">
+    <h1 class="display-4">Welcome to Anandwan</h1>
+    <p class="lead">Book your stay at Anandwan - "Forest of Joy" - a community rehabilitation center founded by social activist Baba Amte near Warora in Maharashtra, India.</p>
+    <hr class="my-4">
+    <p>Check room availability and make a reservation for your visit.</p>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h4>Find Available Rooms</h4>
+            </div>
+            <div class="card-body">
+                <form method="get" action="{% url 'home' %}">
+                    <div class="mb-3">
+                        <label for="id_check_in_date" class="form-label">Check-in Date</label>
+                        {{ form.check_in_date }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_check_out_date" class="form-label">Check-out Date</label>
+                        {{ form.check_out_date }}
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="id_adults" class="form-label">Adults</label>
+                                {{ form.adults }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="id_children" class="form-label">Children</label>
+                                {{ form.children }}
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Search Availability</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h4>About Anandwan</h4>
+            </div>
+            <div class="card-body">
+                <p>Anandwan serves as a self-sufficient community for those affected by leprosy and various disabilities.</p>
+                <p>Besides its rehabilitation work, Anandwan attracts numerous visitors including students, researchers, volunteers, and tourists who come to learn about its social initiatives and community-based rehabilitation model.</p>
+                <a href="#" class="btn btn-outline-success">Learn More</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if available_rooms %}
+<div class="mt-5">
+    <h2>Available Rooms</h2>
+    <hr>
+    <div class="row">
+        {% for room in available_rooms %}
+        <div class="col-md-4">
+            <div class="card room-card">
+                {% if room.room_type.image %}
+                <img src="{{ room.room_type.image.url }}" class="card-img-top room-image" alt="{{ room.room_type.name }}">
+                {% else %}
+                <div class="card-img-top room-image bg-light d-flex align-items-center justify-content-center">
+                    <span class="text-muted">No image available</span>
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ room.room_type.name }} - Room {{ room.room_number }}</h5>
+                    <p class="card-text">{{ room.room_type.description|truncatechars:100 }}</p>
+                    <p class="card-text text-success fw-bold">₹{{ room.room_type.price_per_day }} per night</p>
+                    <a href="{% url 'book_room' room.room_type.id %}" class="btn btn-success">Book Now</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}
