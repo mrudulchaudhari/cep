@@ -1,0 +1,48 @@
+{% extends 'booking/base.html' %}
+
+{% block content %}
+<h2>Available Rooms</h2>
+<div class="alert alert-info">
+    <p>Searching for rooms from <strong>{{ check_in_date }}</strong> to <strong>{{ check_out_date }}</strong> ({{ days }} nights)</p>
+    <p>Guests: <strong>{{ adults }} adults</strong>{% if children > 0 %}, <strong>{{ children }} children</strong>{% endif %}</p>
+</div>
+
+<div class="row">
+    {% for room_type in room_types %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            {% if room_type.image %}
+            <img src="{{ room_type.image.url }}" class="card-img-top room-image" alt="{{ room_type.name }}">
+            {% else %}
+            <div class="card-img-top room-image bg-light d-flex align-items-center justify-content-center">
+                <span class="text-muted">No image available</span>
+            </div>
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ room_type.name }}</h5>
+                <p class="card-text">{{ room_type.description }}</p>
+                <ul class="list-group list-group-flush mb-3">
+                    <li class="list-group-item">Max Capacity: {{ room_type.capacity }} persons</li>
+                    <li class="list-group-item">Price per night: ₹{{ room_type.price_per_day }}</li>
+                    <li class="list-group-item">Total for {{ days }} nights: ₹{{ room_type.price_per_day|floatformat:2|multiply:days }}</li>
+                </ul>
+                <a href="{% url 'book_room' room_type.id %}" class="btn btn-success w-100">Book Now</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-warning">
+            <h4 class="alert-heading">No rooms available!</h4>
+            <p>Unfortunately, there are no rooms available for your selected dates and party size.</p>
+            <hr>
+            <p class="mb-0">Please try different dates or contact us directly for assistance.</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="mt-4">
+    <a href="{% url 'home' %}" class="btn btn-outline-secondary">Back to Search</a>
+</div>
+{% endblock %}

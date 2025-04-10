@@ -47,6 +47,7 @@ def home(request):
     }
     return render(request, 'booking/home.html', context)
 
+# In booking/views.py
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
