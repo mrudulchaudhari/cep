@@ -69,9 +69,10 @@
                 <p>{{ room_type.description }}</p>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Price per night: ₹{{ room_type.price_per_day }}</li>
+                    <li class="list-group-item">Refundable deposit: ₹100</li>
                     <li class="list-group-item">Max Capacity: {{ room_type.capacity }} persons</li>
                     <li class="list-group-item">Stay Duration: {{ days }} nights</li>
-                    <li class="list-group-item">Total Amount: ₹{{ total_amount }}</li>
+                    <li class="list-group-item">Total Amount: ₹{{ total_amount|add:100 }}</li>
                 </ul>
             </div>
         </div>

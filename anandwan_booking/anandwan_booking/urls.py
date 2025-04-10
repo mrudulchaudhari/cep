@@ -26,7 +26,8 @@ urlpatterns = [
     
     # Only override the login and logout views
     path('accounts/login/', auth_views.LoginView.as_view(template_name='booking/login.html'), name='login'),
-    path('accounts/logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
+    # path('accounts/logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
 ]
 
 if settings.DEBUG:
