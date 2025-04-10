@@ -37,11 +37,18 @@ class DateInput(forms.DateInput):
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['check_in_date', 'check_out_date', 'adults', 'children', 'special_requests']
-        widgets = {
-            'check_in_date': DateInput(),
-            'check_out_date': DateInput(),
-        }
+        fields = ['special_requests']  # Only include special_requests field
+        
+    def __init__(self, *args, **kwargs):
+        super(BookingForm, self).__init__(*args, **kwargs)
+        # Make special_requests optional
+        self.fields['special_requests'].required = False
+
+class RoomSearchForm(forms.Form):
+    check_in_date = forms.DateField(widget=DateInput())
+    check_out_date = forms.DateField(widget=DateInput())
+    adults = forms.IntegerField(min_value=1, initial=1)
+    children = forms.IntegerField(min_value=0, initial=0, required=False)
     
     def clean(self):
         cleaned_data = super().clean()
@@ -58,9 +65,3 @@ class BookingForm(forms.ModelForm):
                 raise forms.ValidationError("Check-out date must be after check-in date.")
         
         return cleaned_data
-
-class RoomSearchForm(forms.Form):
-    check_in_date = forms.DateField(widget=DateInput())
-    check_out_date = forms.DateField(widget=DateInput())
-    adults = forms.IntegerField(min_value=1, initial=1)
-    children = forms.IntegerField(min_value=0, initial=0, required=False)
